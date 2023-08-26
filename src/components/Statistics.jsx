@@ -10,3 +10,10 @@ export const Statistics = ({ good, neutral, bad, total, percentage }) => (
     <li className={css.statisticsItem}>Positive feedback: {percentage} %</li>
   </ul>
 );
+Statistics.propTypes = {
+  good: propTypes.number.isRequired,
+  neutral: propTypes.number.isRequired,
+  bad: propTypes.number.isRequired,
+  total: propTypes.number.isRequired,
+  percentage: propTypes.number.isRequired,
+};

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Section } from './Section';
-import { FeedbackOption } from './FeedbackOptions';
+import { FeedbackOptions } from './FeedbackOptions';
 import { Notification } from './Notification';
 import { Statistics } from './Statistics';
 
@@ -37,7 +37,7 @@ export class App extends Component {
     return (
       <div>
         <Section title="Please leave feedback">
-          <FeedbackOption
+          <FeedbackOptions
             options={['Good', 'Neutral', 'Bad']}
             onClick={this.handleClick}
           />
