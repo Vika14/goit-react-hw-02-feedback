@@ -11,14 +11,10 @@ export class App extends Component {
     bad: 0,
   };
 
-  handleClick = e => {
-    if (e === 'Good') {
-      this.setState({ good: this.state.good + 1 });
-    } else if (e === 'Neutral') {
-      this.setState({ neutral: this.state.neutral + 1 });
-    } else if (e === 'Bad') {
-      this.setState({ bad: this.state.bad + 1 });
-    }
+  handleClick = option => {
+    this.setState(prevState => {
+      return { [option]: prevState[option] + 1 };
+    });
   };
 
   totalFeedback = () => {
@@ -27,27 +23,26 @@ export class App extends Component {
   };
 
   percentage = () => {
-    if (this.totalFeedback() === 0) {
-      return 0;
-    }
-    return Math.round((this.state.good / this.totalFeedback()) * 100);
+    return Math.round((this.state.good / this.totalFeedback()) * 100) || 0;
   };
 
   render() {
+    const { good, neutral, bad } = this.state;
+    const total = this.totalFeedback();
     return (
       <div>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            options={['Good', 'Neutral', 'Bad']}
+            options={Object.keys(this.state)}
             onClick={this.handleClick}
           />
         </Section>
         <Section title="Statistics">
-          {this.totalFeedback() !== 0 ? (
+          {total !== 0 ? (
             <Statistics
-              good={this.state.good}
-              neutral={this.state.neutral}
-              bad={this.state.bad}
+              good={good}
+              neutral={neutral}
+              bad={bad}
               total={this.totalFeedback()}
               percentage={this.percentage()}
             />
